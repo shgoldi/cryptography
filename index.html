@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="CoinAtlas Cryptography Project">
+    <!-- This project provides accessibility to information and reports on currencies from the virtual 
+        trade world, across the globe.
+        The project contains and uses JavaScript, jQuery, AJAX API calls, Objects,
+        SessionStorage, Bootstrap, HTML, CSS, and much more! -->
+    <meta name="author" content="Shai Goldstein">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CoinAtlas</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- Google Fonts APIs -->
+    <link href="https://fonts.googleapis.com/css?family=Bevan&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ultra&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Link my CSS file -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- jQuery local library file -->
+    <script src="jquery-3.4.1.js"></script>
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- canvasjs jquery plugin -->
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <section>
+        <header>
+            <div id="header-container">
+
+                <!-- Gifs -->
+                <img id="earth-giphy-welcome" src="assets/images/earth-giphy.gif"></img>
+                <img id="rain-of-coins" src="assets/images/rain-of-coins.gif"></img>
+
+                <!-- Headers -->
+                <h1 class="glow">CoinAtlas</h1>
+                <h2 id="welcome-sentence">Welcome to CoinAtlas, the best crypto website ever !!</h2>
+
+                <!-- Parallax Scrolling Images -->
+                <div id="header-parallax-scrolling-images">
+                    <div class="bg-img-map">
+                        <div class="caption">
+                        </div>
+                    </div>
+                    <div
+                        style="color: #777;background-color:#282E34;text-align:center;padding:50px 80px;text-align: justify;">
+                    </div>
+                    <div class="bg-img-finance">
+                        <div class="caption">
+                        </div>
+                    </div>
+                    <div style="position:relative;">
+                        <div
+                            style="color:#ddd;background-color:#282E34;text-align:center;padding:50px 80px;text-align: justify;">
+                        </div>
+                    </div>
+                    <div class="bg-img-cart">
+                        <div class="caption">
+                        </div>
+                    </div>
+                    <div style="position:relative;">
+                        <div
+                            style="color:#ddd;background-color:#282E34;text-align:center;padding:50px 80px;text-align: justify;">
+                        </div>
+                    </div>
+                    <div class="bg-img-earth">
+                        <div class="caption">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="container">
+
+                <!-- Saving place for Spinner, if shown -->
+                <div class="d-flex justify-content-center">
+                    <div id="spinner" class="spinner-border text-primary"></div>
+                </div>
+
+                <!-- Navbar-->
+                <nav class="navbar navbar-expand-sm navbar-light bg-light sticky-top my-nav">
+                    <!-- Brand -->
+                    <a class="navbar-brand" href="#">
+                        <img id="coin-atlas-logo" src="assets/images/coin-atlas-thumbnail.jpg" alt="Logo">
+                    </a>
+
+                    <!-- Toggler/collapsibe Button -->
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#collapsibleNavbar">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <!-- Nav links -->
+                    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="pill" id="currencies-nav-link"
+                                    href="#top">Currencies</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="pill" id="live-reports-nav-link"
+                                    href="#live-reports">Live
+                                    Reports</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="pill" id="about-nav-link" href="#about">About</a>
+                            </li>
+                        </ul>
+
+                        <!-- Form control: input search and buttons -->
+                        <form class="form-inline ml-auto currencies-menu-elements">
+                            <input type="text" name="search" class="form-control mr-sm-2" id="search-input"
+                                placeholder="Search Currency..." />
+                            <button type="button" class="btn btn-warning" id="btn-search-currencies">Search</button>
+                            <button type="button" class="btn btn-info" id="btn-display-all-currencies">Show All</button>
+                            <button type="button" class="btn btn-success" id="btn-display-selected-currencies">Show
+                                Selected</button>
+                        </form>
+
+                    </div>
+
+                </nav>
+
+                <div id="main-container" class="container-fluid">
+
+                    <!-- Saving place for alert line, if shown -->
+                    <div id="alert-line">
+                    </div>
+
+                    <!-- Homepage (Currencies) div -->
+                    <div id="homepage">
+
+                        <div class="container">
+
+                            <!-- The Modal, for currencies selection, using toggle buttons -->
+                            <div class="modal" id="my-modal">
+                                <div class="modal-dialog modal-lg modal-dialog-centered">
+                                    <div class="modal-content">
+
+                                        <!-- Modal Header -->
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Please choose which coin to remove from the list:
+                                            </h4>
+                                            <button type="button" id="btn-x-cancel-my-modal" class="close"
+                                                data-dismiss="modal">&times;</button>
+                                        </div>
+
+                                        <!-- Modal body -->
+                                        <div id="my-modal-body" class="modal-body">
+
+                                        </div>
+
+                                        <!-- Modal footer -->
+                                        <div class="modal-footer">
+                                            <button type="button" id="btn-cancel-modal" class="close"
+                                                data-dismiss="modal">Cancel</button>
+                                            <button type="button" id="btn-close-modal" class="btn btn-danger"
+                                                data-dismiss="modal">Close</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Dynamic container holding currencies -->
+                        <div id="currencies-container">
+
+                        </div>
+
+                    </div>
+
+                    <!-- Live Reports (chart) div -->
+                    <div id="live-reports">
+
+                        <!-- Gif -->
+                        <img id="coins-animation-gif" src="assets/images/coins-droping-smiling.gif"></img>
+
+                        <!-- Audio -->
+                        <audio id="finance-status">
+                            <source src="/assets/audio/cash-register.mp3" type="audio/mpeg">
+                        </audio>
+
+                        <!-- Dynamic container holding chart -->
+                        <div id="chart-container">
+
+                        </div>
+                    </div>
+
+                    <!-- About div -->
+                    <div id="about">
+                        <div class="container">
+
+                            <!-- My Card -->
+                            <div class="my-card">
+                                <img class="card-img-top" id="me" src="assets/images/me.jpg" alt="My card image"></img>
+                                <div class="card-body">
+                                    <h4 class="card-title">Shai Goldstein</h4>
+                                    <p class="card-text">Fullstack Web Developer</p>
+                                    <p>John Bryce College</p>
+                                    <p>Email: <a href="mailto:shgoldi@gmail.com">shgoldi@gmail.com</a></p>
+                                    <p>Linkedin: <a href="https://linkedin.com/in/shai-goldstein-11598121/"><i
+                                                class="fa fa-linkedin"></i></a></p>
+                                </div>
+                            </div>
+
+                            <!-- About textual content, about myself and the project -->
+                            <div class="about-text typewriter">
+                                A bit about myself...<br />
+                                My name is Shai Goldstein.<br />
+                                I live in Holon, Israel.<br />
+                                I like to write and develop programs and applications in JavaScript!<br />
+                                This cryptography project, named CoinAtlas, provides accessibility to
+                                information and reports on currencies from the virtual trade world, across the
+                                globe.<br />
+                                The project contains and uses JavaScript, jQuery, AJAX API calls, Objects,
+                                SessionStorage, Bootstrap, HTML, CSS, and much more!<br />
+                                I hope you like my website at least as much as I do!
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Copyrights -->
+                <div class="copyrights-container">
+                    <div class="copyrights-content">
+                        <p>Developed by &copy; Shai Goldstein, 2019</p>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <footer>
+
+        </footer>
+    </section>
+</body>
+
+<!-- My script -->
+<script src="main.js"></script>
+
+</html>
